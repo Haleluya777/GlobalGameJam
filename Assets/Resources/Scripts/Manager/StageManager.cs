@@ -36,11 +36,12 @@ public class StageManager : MonoBehaviour
     {
         if (chance != previousChange)
         {
-            if (chance <= 0)
+            if (chance <= 0 && !GameManager.instance.gameOver)
             {
                 Debug.Log("게임 종료.");
+                GameManager.instance.gameOver = true;
                 previousChange = chance;
-                StageFailed();
+                StageFailed(true);
                 return;
             }
 
@@ -89,7 +90,8 @@ public class StageManager : MonoBehaviour
 
             if (i > characters)
             {
-                GameManager.instance.characterManager.maker[Stage].MakeWitness(CharacterTemplate);
+                GameManager.instance.characterManager.maker[Stage].MakeWitness(CharacterTemplate); //타겟 생성.
+                GameManager.instance.canvasManager.witness = CharacterTemplate;
             }
             else
             {
@@ -121,11 +123,18 @@ public class StageManager : MonoBehaviour
         }
     }
 
-    public void StageFailed()
+    public void StageFailed(bool busted = false)
     {
         Debug.Log("스테이지 실패.");
         GameManager.instance.canControl = false;
-        GameManager.instance.canvasManager.ActiveStageFailedrPanel();
+        if (busted)
+        {
+            GameManager.instance.canvasManager.ActiveStageFailedrPanel(busted);
+        }
+        else
+        {
+            GameManager.instance.canvasManager.ActiveStageFailedrPanel();
+        }
     }
 
     public void StageClear()

@@ -13,6 +13,7 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] private Slider movementGage;
 
     public List<Sprite> targetSprites = new List<Sprite>();
+    public GameObject witness;
 
     public void SetMovementGage(float movement)
     {
@@ -43,9 +44,12 @@ public class CanvasManager : MonoBehaviour
         StageClearPanel.SetActive(true);
     }
 
-    public void ActiveStageFailedrPanel()
+    public void ActiveStageFailedrPanel(bool busted = false)
     {
         StageFailedPanel.SetActive(true);
+        if (busted) StageFailedPanel.transform.GetChild(0).gameObject.SetActive(true);
+        else StageFailedPanel.transform.GetChild(1).gameObject.SetActive(true);
+
         Invoke("ActiveReGameObj", 1.5f);
     }
 

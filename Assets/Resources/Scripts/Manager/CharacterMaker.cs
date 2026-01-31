@@ -21,6 +21,7 @@ public class CharacterMaker
     {
         GameManager.instance.canvasManager.targetSprites.Clear();
 
+        //스프라이트 변경
         var _face = template.transform.GetChild(0).GetComponent<Image>();
         var _pants = template.transform.GetChild(1).GetComponent<Image>();
         var _body = template.transform.GetChild(2).GetComponent<Image>();
@@ -31,6 +32,7 @@ public class CharacterMaker
         _body.sprite = Bodies[Random.Range(0, Bodies.Count)];
         _hair.sprite = Hairs[Random.Range(0, Hairs.Count)];
 
+        //클릭 시 이벤트 추가.
         var character = template.GetComponent<Character>();
 
         character.InitClickEvent(true);
@@ -44,7 +46,7 @@ public class CharacterMaker
 
         //template.name = "Target";
 
-        return null;
+        return template;
     }
 
     public GameObject MakeCharacter(GameObject template)

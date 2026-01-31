@@ -31,13 +31,17 @@ public class PlayerManager : MonoBehaviour
             bool isStuckAtBoundary = (rectTransform.anchoredPosition.x <= -700 && input.x < 0) || (rectTransform.anchoredPosition.x >= 700 && input.x > 0) || (rectTransform.anchoredPosition.y <= -700 && input.y < 0) || (rectTransform.anchoredPosition.y >= 300 && input.y > 0);
 
             if (!GameManager.instance.soundManager.audioSources[0].isPlaying) GameManager.instance.soundManager.audioSources[0].Play();
-            Debug.Log(GameManager.instance.soundManager.audioSources[0].isPlaying);
 
             if (GameManager.instance.MovingGage > 0 && !isStuckAtBoundary)
             {
-
                 gageDecreaseRate = 10f;
                 moveDelta = input * speed * Time.deltaTime;
+            }
+            else if (GameManager.instance.MovingGage <= 0 && !GameManager.instance.gameOver)
+            {
+                GameManager.instance.gameOver = true;
+                Debug.Log("넌 게임 종료다 이자식아");
+                GameManager.instance.stageManager.StageFailed();
             }
         }
         else
