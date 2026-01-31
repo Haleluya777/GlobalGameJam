@@ -31,15 +31,15 @@ public class CanvasManager : MonoBehaviour
 
     public void ActiveStageClearPanel()
     {
-        var face = targetFullObj.transform.GetChild(0).GetComponent<Image>();
-        var pants = targetFullObj.transform.GetChild(1).GetComponent<Image>();
-        var body = targetFullObj.transform.GetChild(2).GetComponent<Image>();
-        var hair = targetFullObj.transform.GetChild(3).GetComponent<Image>();
-
-        face.sprite = targetSprites[0];
-        pants.sprite = targetSprites[1];
-        body.sprite = targetSprites[2];
-        hair.sprite = targetSprites[3];
+        //var face = targetFullObj.transform.GetChild(0).GetComponent<Image>();
+        //var pants = targetFullObj.transform.GetChild(1).GetComponent<Image>();
+        //var body = targetFullObj.transform.GetChild(2).GetComponent<Image>();
+        //var hair = targetFullObj.transform.GetChild(3).GetComponent<Image>();
+        //
+        //face.sprite = targetSprites[0];
+        //pants.sprite = targetSprites[1];
+        //body.sprite = targetSprites[2];
+        //hair.sprite = targetSprites[3];
 
         StageClearPanel.SetActive(true);
     }

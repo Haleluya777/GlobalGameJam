@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems; // EventTrigger 사용을 위해 추가
 
@@ -61,6 +62,11 @@ public class StageManager : MonoBehaviour
 
     public void StageStart()
     {
+        chance = 3;
+        GameManager.instance.RefillGage();
+        GameManager.instance.stageClear = false;
+        GameManager.instance.gameOver = false;
+
         if (Stage >= StagePoints.Count || Stage >= Masks.Count || Stage >= GameManager.instance.characterManager.maker.Count)
         {
             return;
@@ -101,8 +107,8 @@ public class StageManager : MonoBehaviour
             CharacterTemplate.transform.SetParent(point.transform, false);
 
             var pos = CharacterTemplate.GetComponent<RectTransform>();
-            // pos.anchoredPosition = new Vector3(0, 0, 0);
-            // pos.localEulerAngles = Vector3.zero;
+            pos.anchoredPosition = Vector3.zero;
+            pos.localEulerAngles = Vector3.zero;
             pos.localScale = 2 * CharacterTemplate.transform.parent.localScale;
 
             availablePoints.Remove(point);
@@ -141,6 +147,7 @@ public class StageManager : MonoBehaviour
     {
         Debug.Log("스테이지 클리어");
         GameManager.instance.canControl = false;
+        GameManager.instance.stageClear = true;
         GameManager.instance.canvasManager.ActiveStageClearPanel();
     }
 
@@ -163,7 +170,6 @@ public class StageManager : MonoBehaviour
         }
 
         Stage++;
-        GameManager.instance.RefillGage();
         Stages[Stage].SetActive(true);
     }
 }

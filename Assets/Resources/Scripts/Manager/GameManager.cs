@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public bool canControl;
     public float MovingGage = 100f;
     public bool gameOver = false;
+    public bool stageClear = false;
 
     private void Awake()
     {

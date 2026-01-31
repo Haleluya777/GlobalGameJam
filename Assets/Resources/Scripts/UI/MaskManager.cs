@@ -20,6 +20,8 @@ public class MaskManager : MonoBehaviour
 
     public void SetMask()
     {
+        Debug.Log(GameManager.instance.stageManager.chance);
+        if (GameManager.instance.stageManager.chance <= 0) return;
         maskUI.SetTextures(crackSprite[(GameManager.instance.stageManager.chance - 1)].texture, holeSprite.texture);
     }
 }
