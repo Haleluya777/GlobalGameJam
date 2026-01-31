@@ -43,4 +43,9 @@ public class GameManager : MonoBehaviour
     {
         MovingGage = 100f;
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }

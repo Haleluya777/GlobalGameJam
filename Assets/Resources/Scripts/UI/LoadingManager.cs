@@ -7,6 +7,8 @@ public class LoadingManager : MonoBehaviour
 {
     public static LoadingManager instance;
     [SerializeField] private GameObject Loading;
+    private float currentProgress;
+    private float timer;
 
     void Awake()
     {
@@ -25,7 +27,7 @@ public class LoadingManager : MonoBehaviour
     public void LoadScene(string sceneName)
     {
         Loading.SetActive(true);
-        //StartCoroutine(LoadingAsync(sceneName));
+        StartCoroutine(LoadingAsync(sceneName));
     }
 
     private IEnumerator LoadingAsync(string sceneName)
@@ -33,14 +35,23 @@ public class LoadingManager : MonoBehaviour
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneName);
         asyncOperation.allowSceneActivation = false;
 
-        while (true)
+        timer = 0f;
+
+        while (!asyncOperation.isDone)
         {
-            if (asyncOperation.isDone)
+            float realProgress = Mathf.Clamp01(asyncOperation.progress / 0.9f);
+
+            timer += Time.deltaTime;
+            currentProgress = Mathf.Min(realProgress, timer / 2f);
+
+            if (asyncOperation.progress >= 0.9f && timer >= 2f)
             {
                 asyncOperation.allowSceneActivation = true;
-                break;
+                //this.gameObject.SetActive(false);   
             }
+
+            yield return null;
         }
-        yield return null;
+        this.gameObject.SetActive(false);
     }
 }
