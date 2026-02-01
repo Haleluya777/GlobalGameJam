@@ -11,9 +11,16 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] private GameObject StageFailedPanel;
     [SerializeField] private GameObject ReGameObj;
     [SerializeField] private Slider movementGage;
+    [SerializeField] private GameObject staffRoll;
+    private bool rolling = false;
 
     public List<Sprite> targetSprites = new List<Sprite>();
     public GameObject witness;
+
+    void Update()
+    {
+        if (rolling) staffRoll.transform.GetChild(0).transform.Translate(Vector2.up * 4f * Time.deltaTime);
+    }
 
     public void SetMovementGage(float movement)
     {
@@ -42,6 +49,24 @@ public class CanvasManager : MonoBehaviour
         //hair.sprite = targetSprites[3];
 
         StageClearPanel.SetActive(true);
+    }
+
+    public void ActiveStaffRoll()
+    {
+        staffRoll.SetActive(true);
+        Invoke("RollingObj", .5f);
+    }
+
+    public void RollingObj()
+    {
+        rolling = true;
+        Invoke("DisableRoll", 5f);
+    }
+
+    private void DisableRoll()
+    {
+        rolling = false;
+        //Application.Quit();
     }
 
     public void ActiveStageFailedrPanel(bool busted = false)

@@ -49,4 +49,10 @@ public class GameManager : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void GameClear()
+    {
+        Debug.Log("게임을 클리어 하였습니다.");
+        canvasManager.ActiveStaffRoll();
+    }
 }

@@ -166,6 +166,7 @@ public class StageManager : MonoBehaviour
     {
         if (Stage + 1 >= Stages.Count)
         {
+            GameManager.instance.GameClear();
             return;
         }
 

@@ -48,7 +48,7 @@ public class PlayerManager : MonoBehaviour
                 rectTransform.anchoredPosition = new Vector2(rectTransform.anchoredPosition.x, bobbingBaseYPosition);
             }
 
-            bool isStuckAtBoundary = (rectTransform.anchoredPosition.x <= -700 && input.x < 0) || (rectTransform.anchoredPosition.x >= 700 && input.x > 0) || (rectTransform.anchoredPosition.y <= -700 && input.y < 0) || (rectTransform.anchoredPosition.y >= 300 && input.y > 0);
+            bool isStuckAtBoundary = (rectTransform.anchoredPosition.x <= -700 && input.x < 0) || (rectTransform.anchoredPosition.x >= 700 && input.x > 0) || (rectTransform.anchoredPosition.y <= -700 && input.y < 0) || (rectTransform.anchoredPosition.y >= 400 && input.y > 0);
             if (!GameManager.instance.soundManager.audioSources[0].isPlaying) GameManager.instance.soundManager.audioSources[0].Play();
 
             if (GameManager.instance.MovingGage > 0 && !isStuckAtBoundary)
@@ -84,7 +84,7 @@ public class PlayerManager : MonoBehaviour
         Vector2 nextPosition = rectTransform.anchoredPosition + moveDelta;
 
         float clampedX = Mathf.Clamp(nextPosition.x, -700, 700);
-        float clampedY = Mathf.Clamp(nextPosition.y, -700, 300);
+        float clampedY = Mathf.Clamp(nextPosition.y, -700, 400);
 
         // Apply bobbing offset if currently bobbing
         if (isBobbing)
